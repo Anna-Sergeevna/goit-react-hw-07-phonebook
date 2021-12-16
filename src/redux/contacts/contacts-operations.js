@@ -13,18 +13,26 @@ import {
 
 axios.defaults.baseURL = 'https://61bb7695e943920017784ed1.mockapi.io/api/v1';
 
-export const fetchContact = () => dispatch => {
+export const fetchContact = () => async dispatch => {
   dispatch(fetchContactRequst());
 
-  axios
-    .get('/contacts')
-    .then(({ data }) => dispatch(fetchContactSuccess(data)))
-    .catch(error => dispatch(fetchContactError(error)));
+  try {
+    const { data } = await axios.get('/contacts');
+
+    dispatch(fetchContactSuccess(data));
+  } catch (error) {
+    dispatch(fetchContactError(error));
+  }
+
+  // axios
+  //   .get('/contacts')
+  //   .then(({ data }) => dispatch(fetchContactSuccess(data)))
+  //   .catch(error => dispatch(fetchContactError(error)));
 };
 
 export const addContact =
   ({ name, phone }) =>
-  dispatch => {
+  async dispatch => {
     const contact = {
       name,
       phone,
@@ -32,10 +40,13 @@ export const addContact =
 
     dispatch(addContactRequst());
 
-    axios
-      .post('/contacts', contact)
-      .then(({ data }) => dispatch(addContactSuccess(data)))
-      .catch(error => dispatch(addContactError(error)));
+    try {
+      const { data } = await axios.post('/contacts', contact);
+
+      dispatch(addContactSuccess(data));
+    } catch (error) {
+      dispatch(addContactError(error));
+    }
   };
 
 export const deleteContact = id => dispatch => {
