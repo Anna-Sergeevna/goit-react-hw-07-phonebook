@@ -23,11 +23,11 @@ export const fetchContact = () => dispatch => {
 };
 
 export const addContact =
-  ({ name, number }) =>
+  ({ name, phone }) =>
   dispatch => {
     const contact = {
       name,
-      number,
+      phone,
     };
 
     dispatch(addContactRequst());

@@ -6,7 +6,7 @@ import s from './ContactForm.module.css';
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -18,8 +18,8 @@ function ContactForm() {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -32,14 +32,14 @@ function ContactForm() {
 
     contacts.map(contact => contact.name).includes(name)
       ? alert(`${name} is already in contacts.`)
-      : dispatch(addContact({ name, number }));
+      : dispatch(addContact({ name, phone }));
 
     reset();
   };
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -59,15 +59,15 @@ function ContactForm() {
         />
       </label>
       <label>
-        <p className={s.text}>Number</p>
+        <p className={s.text}>Phone</p>
         <input
           type='tel'
-          name='number'
+          name='phone'
           pattern='\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
           title='Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +'
           required
           className={s.input}
-          value={number}
+          value={phone}
           onChange={handleChange}
         />
       </label>
