@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
 import Container from 'components/Container';
 import Section from 'components/Section';
 import ContactForm from 'components/ContactForm';
@@ -23,6 +24,7 @@ function App() {
         <Filter />
         <ContactList />
       </Section>
+      <Toaster position='top-right' />
     </Container>
   );
 }

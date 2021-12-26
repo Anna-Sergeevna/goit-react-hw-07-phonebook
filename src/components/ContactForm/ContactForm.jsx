@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
 import { contactsOperations, contactsSelectors } from 'redux/contacts/index';
 import s from './ContactForm.module.css';
 
@@ -30,10 +31,11 @@ function ContactForm() {
     e.preventDefault();
 
     contacts.map(contact => contact.name).includes(name)
-      ? alert(`${name} is already in contacts.`)
+      ? toast.error(`${name} is already in contacts.`)
       : dispatch(contactsOperations.addContact({ name, phone }));
 
     reset();
+    toast.success('Add contact');
   };
 
   const reset = () => {
