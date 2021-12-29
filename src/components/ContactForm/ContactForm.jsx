@@ -30,12 +30,14 @@ function ContactForm() {
   const haldleSubmit = e => {
     e.preventDefault();
 
-    contacts.map(contact => contact.name).includes(name)
-      ? toast.error(`${name} is already in contacts.`)
-      : dispatch(contactsOperations.addContact({ name, phone }));
+    if (contacts.map(contact => contact.name).includes(name)) {
+      toast.error(`${name} is already in contacts.`);
+    } else {
+      dispatch(contactsOperations.addContact({ name, phone }));
+      toast.success('Add contact');
+    }
 
     reset();
-    toast.success('Add contact');
   };
 
   const reset = () => {
